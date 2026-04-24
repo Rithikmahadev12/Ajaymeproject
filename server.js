@@ -104,17 +104,28 @@ app.post('/send-order', async (req, res) => {
   </div>`;
 
   try {
-    await resend.emails.send({
+    console.log('Attempting to send email to:', OWNER_EMAILS);
+    console.log('Using API key starting with:', RESEND_API_KEY.substring(0, 8));
+
+    const response = await resend.emails.send({
       from:    'onboarding@resend.dev',
       to:      OWNER_EMAILS,
       subject: `New Order ${order.id} - $${order.total.toFixed(2)} - ${order.customer}`,
       html:    htmlBody,
     });
 
-    console.log(`Email sent for order ${order.id}`);
-    res.json({ success: true });
+    console.log('Resend full response:', JSON.stringify(response));
+
+    if (response.error) {
+      console.error('Resend returned error:', JSON.stringify(response.error));
+      return res.status(500).json({ success: false, error: response.error });
+    }
+
+    console.log('Email sent successfully! ID:', response.data?.id);
+    res.json({ success: true, id: response.data?.id });
   } catch (err) {
-    console.error('Email send failed:', err.message);
+    console.error('Email send EXCEPTION:', err.message);
+    console.error('Full error:', JSON.stringify(err));
     res.status(500).json({ success: false, error: err.message });
   }
 });
