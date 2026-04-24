@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(cors());
 
 // ── Serve the HTML file at the root URL ──────────────────
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname), { index: 'apex-delivery.html' }));
 
 // ── CONFIG — only thing you need to change ───────────────
 const RESEND_API_KEY = 're_Ggfubn2U_DE2JDG8rutVG36Q1i3gRSgMY'; // ← paste your key from resend.com
