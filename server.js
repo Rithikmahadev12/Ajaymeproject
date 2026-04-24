@@ -8,7 +8,7 @@
 //  2. In this folder, run:
 //       npm install
 //  3. Sign up FREE at https://resend.com (no credit card needed)
-//  4. Go to API Keys → Create Key → copy ite
+//  4. Go to API Keys → Create Key → copy it
 //  5. Paste it below where it says YOUR_RESEND_API_KEY
 //  6. Start the server:
 //       npm start
@@ -28,8 +28,12 @@ app.use(cors());
 // ── Serve the HTML file at the root URL ──────────────────
 app.use(express.static(path.join(__dirname), { index: 'apex-delivery.html' }));
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'apex-delivery.html'));
+});
+
 // ── CONFIG — only thing you need to change ───────────────
-const RESEND_API_KEY = 're_Ggfubn2U_DE2JDG8rutVG36Q1i3gRSgMY'; // ← paste your key from resend.com
+const RESEND_API_KEY = process.env.RESEND_API_KEY || 'YOUR_RESEND_API_KEY'; // ← set this in Render environment variables
 
 const OWNER_EMAILS = [
   '519314@bsd48.org',
@@ -101,9 +105,9 @@ app.post('/send-order', async (req, res) => {
 
   try {
     await resend.emails.send({
-      from:    'Apex Delivery <onboarding@resend.dev>',
+      from:    'onboarding@resend.dev',
       to:      OWNER_EMAILS,
-      subject: `New Order ${order.id} — $${order.total.toFixed(2)} — ${order.customer}`,
+      subject: `New Order ${order.id} - $${order.total.toFixed(2)} - ${order.customer}`,
       html:    htmlBody,
     });
 
