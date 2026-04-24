@@ -8,7 +8,7 @@
 //  2. In this folder, run:
 //       npm install
 //  3. Sign up FREE at https://resend.com (no credit card needed)
-//  4. Go to API Keys → Create Key → copy it
+//  4. Go to API Keys → Create Key → copy ite
 //  5. Paste it below where it says YOUR_RESEND_API_KEY
 //  6. Start the server:
 //       npm start
@@ -29,7 +29,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname)));
 
 // ── CONFIG — only thing you need to change ───────────────
-const RESEND_API_KEY = 'YOUR_RESEND_API_KEY'; // ← paste your key from resend.com
+const RESEND_API_KEY = 're_Ggfubn2U_DE2JDG8rutVG36Q1i3gRSgMY'; // ← paste your key from resend.com
 
 const OWNER_EMAILS = [
   '519314@bsd48.org',
