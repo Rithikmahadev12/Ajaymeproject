@@ -51,7 +51,7 @@ const transporter = nodemailer.createTransport({
 
 // Serve the main HTML file
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'apex-delivery.html'));
 });
 
 // GET prices — returns { tb1: 2.49, tb2: 2.49, ... }
